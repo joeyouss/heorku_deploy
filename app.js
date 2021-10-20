@@ -30,13 +30,21 @@ app.set("view engine", "ejs");
 app.use(express.urlencoded({extended:false}))
 app.use(methodOverride("_method"))
 // -----
-app.get("/", async (req, res)=>{
-    const recipes = await Recipee.find().sort({
-        createdAt: 'desc'
-    })
-    res.render("recipes/index", {recipes : recipes});
-})
-app.use("/recipes", recipeRouter)
+
+const { PORT=3000, LOCAL_ADDRESS='0.0.0.0' } = process.env
+app.listen(PORT, LOCAL_ADDRESS, () => {
+  const address = app.address();
+  console.log('server listening at', address);
+});
+
+
+// app.get("/", async (req, res)=>{
+//     const recipes = await Recipee.find().sort({
+//         createdAt: 'desc'
+//     })
+//     res.render("recipes/index", {recipes : recipes});
+// })
+// app.use("/recipes", recipeRouter)
 
 
 // app.listen(3000);
