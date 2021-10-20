@@ -5,8 +5,8 @@ const app = express();
 const recipeRouter = require("./routes/recipes")
 const methodOverride = require("method-override")
 
-const DB = 'mongodb+srv://joeyous:fgbjjgci@cluster0.34ov6.mongodb.net/recipesApp?retryWrites=true&w=majority'
-mongoose.connect(DB,{
+const DATABASE = 'mongodb+srv://joeyous:fgbjjgci@cluster0.34ov6.mongodb.net/recipesApp?retryWrites=true&w=majority'
+mongoose.connect(DATABASE,{
         useNewUrlParser: true,
         useUnifiedTopology: true,
     }).then(()=>{
