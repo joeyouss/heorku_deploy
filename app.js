@@ -5,6 +5,12 @@ const app = express();
 const recipeRouter = require("./routes/recipes")
 const methodOverride = require("method-override")
 
+
+const port = process.env.port || 3000;
+const server = app.listen(port,()=>{
+    console.log("app running on specified port");
+});
+
 const DATABASE = 'mongodb+srv://joeyous:fgbjjgci@cluster0.34ov6.mongodb.net/recipesApp?retryWrites=true&w=majority'
 mongoose.connect(DATABASE,{
         useNewUrlParser: true,
@@ -15,7 +21,7 @@ mongoose.connect(DATABASE,{
 // {
 //     useNewUrlParser: true,
 //     useUnifiedTopology: true,
-// })
+// })git
 
 
 // ----
@@ -44,8 +50,4 @@ app.get("/", async (req, res)=>{
 })
 app.use("/recipes", recipeRouter)
 
-const port = process.env.port || 3000;
-const server = app.listen(port,()=>{
-    console.log("app running on specified port");
-});
 // app.listen(3000);
