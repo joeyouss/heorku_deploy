@@ -5,14 +5,6 @@ const app = express();
 const recipeRouter = require("./routes/recipes")
 const methodOverride = require("method-override")
 
-
-
-const host = '0.0.0.0';
-const port = process.env.port || 3000;
-const server = app.listen(port, host,()=>{
-    console.log("app running on specified port and host");
-});
-
 const DATABASE = 'mongodb+srv://joeyous:fgbjjgci@cluster0.34ov6.mongodb.net/recipesApp?retryWrites=true&w=majority'
 mongoose.connect(DATABASE,{
         useNewUrlParser: true,
@@ -36,20 +28,15 @@ app.get("/", async (req, res)=>{
     const recipes = await Recipee.find().sort({
         createdAt: 'desc'
     })
-    // const recipes = [{
-    //     // we need a title, date and recipe
-    //     title:"Test recipe",
-    //     createdAt: new Date(),
-    //     ingre: "just checking"
-    // },
-    // {
-    //     // we need a title, date and recipe
-    //     title:"Test recipe 2",
-    //     createdAt: new Date(),
-    //     ingre: "just checking2"
-    // }]
     res.render("recipes/index", {recipes : recipes});
 })
 app.use("/recipes", recipeRouter)
+
+
+const host = '0.0.0.0';
+const port = process.env.port || 3000;
+const server = app.listen(port, host,()=>{
+    console.log("app running on specified port and host");
+});
 
 // app.listen(3000);
